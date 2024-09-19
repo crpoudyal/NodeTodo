@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nodetodo/bloc/todo_bloc.dart';
+import 'package:nodetodo/repository/todo_repository.dart';
 import 'package:nodetodo/screens/home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<TodoBloc>(
+          create: (context) => TodoBloc(TodoRepo())..add(GetTodosEvent()))
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
