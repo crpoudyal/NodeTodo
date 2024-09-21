@@ -18,3 +18,5 @@ final class TodoErrorState extends TodoState {
 
   TodoErrorState({required this.message});
 }
+
+final class TodoAdded extends TodoState {}

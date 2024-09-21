@@ -19,5 +19,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         emit(TodoErrorState(message: e.toString()));
       }
     });
+
+    on<CreateTodoEvent>((event, emit) async {
+      emit(TodoLoadingState());
+      try {
+        await todoRepo.createTodos(event.todos);
+        emit(TodoAdded());
+      } catch (e) {
+        emit(TodoErrorState(message: e.toString()));
+      }
+    });
   }
 }
