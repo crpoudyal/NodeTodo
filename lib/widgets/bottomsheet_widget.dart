@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nodetodo/bloc/todo_bloc.dart';
+import 'package:nodetodo/model/todo_model.dart';
 import 'package:nodetodo/repository/todo_repository.dart';
 import 'package:nodetodo/widgets/textfield_widget.dart';
 
@@ -27,7 +30,18 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               hintText: "Enter Content..",
               labelText: "Content"),
           const SizedBox(height: 20),
-          ElevatedButton(onPressed: () {}, child: const Text("Save"))
+          ElevatedButton(
+              onPressed: () {
+                context.read<TodoBloc>().add(
+                      CreateTodoEvent(
+                          todos: TodoModel(
+                              id: '',
+                              title: title.text,
+                              content: content.text,
+                              isComplete: false)),
+                    );
+              },  
+              child: const Text("Save"))
         ],
       ),
     );
