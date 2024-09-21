@@ -1,23 +1,9 @@
 const mongoose = require("mongoose");
 
-const todoSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    isComplete: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true }
-);
+const todoSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  body: { type: String, required: true }, // Ensure this matches the request
+  completed: { type: Boolean, default: false },
+});
 
-const todoModel = mongoose.model("Todo", todoSchema);
-
-module.exports = todoModel;
+module.exports = mongoose.model("Todo", todoSchema);
